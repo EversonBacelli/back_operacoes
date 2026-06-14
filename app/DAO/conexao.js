@@ -8,8 +8,6 @@ let password = process.env.PWD
 let database = process.env.DATA_BASE
 
 async function conexao() {
-    console.log(host, port, user, database)
-    console.log(password)
     const pool = mysql.createPool({
         host: host, 
         port: port,

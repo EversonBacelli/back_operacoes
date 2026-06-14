@@ -1,6 +1,8 @@
 import express from 'express'
 // Importando as funções lógicas do banco de dados (vamos criá-las no passo abaixo)
 import { buscarClientes } from './models/clientes/getCliente.js'
+import { buscarProdutos } from './models/produto/getProduto.js'
+import { buscarPedidos } from './models/pedido/getPedido.js'
 
 const app = express()
 
@@ -22,6 +24,23 @@ app.get('/cliente', async (req, res) => {
     }
 })
 
+app.get('/produto', async (req, res) => {
+    try {
+        const produtos = await buscarProdutos()
+        res.json(produtos)
+    } catch (erro) {
+        res.status(500).json({ erro: 'Erro ao listar produtos   ', detalhes: erro.message })
+    }
+})
+
+app.get('/pedido', async (req, res) => {
+    try {
+        const pedidos = await buscarPedidos()
+        res.json(pedidos)
+    } catch (erro) {
+        res.status(500).json({ erro: 'Erro ao listar pedidos', detalhes: erro.message })
+    }
+})
 
 
 // Inicialização do Servidor
